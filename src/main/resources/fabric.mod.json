@@ -1,11 +1,11 @@
 {
   "schemaVersion": 1,
-  "id": "addon-template",
+  "id": "litematica-printer-plus",
   "version": "${version}",
-  "name": "Addon Template",
-  "description": "An addon template for Meteor Client addons.",
+  "name": "LitematicaPrinterPlus",
+  "description": "Printer For LitematicaPrinterPlus",
   "authors": [
-    "seasnail"
+    "Dorty"
   ],
   "contact": {
     "repo": "https://github.com/MeteorDevelopment/meteor-addon-template"
@@ -14,7 +14,7 @@
   "environment": "client",
   "entrypoints": {
     "meteor": [
-      "com.example.addon.AddonTemplate"
+      "com.LitematicaPrinterPlus.addon.AddonTemplate"
     ]
   },
   "mixins": [

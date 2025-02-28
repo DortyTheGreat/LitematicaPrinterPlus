@@ -17,6 +17,7 @@ repositories {
         name = "meteor-maven-snapshots"
         url = uri("https://maven.meteordev.org/snapshots")
     }
+	maven { url = uri("https://jitpack.io") }
 }
 
 dependencies {
@@ -27,6 +28,13 @@ dependencies {
 
     // Meteor
     modImplementation("meteordevelopment:meteor-client:${properties["minecraft_version"] as String}-SNAPSHOT")
+	
+	//litematica
+    //modImplementation "curse.maven:litematica-${project.litematica_projectid}:${project.litematica_fileid}"
+	modImplementation("com.github.sakura-ryoko:litematica:1.21-sakura.8")
+    //modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
+	modImplementation("com.github.sakura-ryoko:malilib:1.21-sakura.6")
+
 }
 
 tasks {

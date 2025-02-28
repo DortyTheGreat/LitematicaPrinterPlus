@@ -1,6 +1,7 @@
 package com.LitematicaPrinterPlus.addon;
 
 import com.LitematicaPrinterPlus.addon.modules.Printer;
+import com.LitematicaPrinterPlus.addon.modules.SecondPerspective;
 import com.mojang.logging.LogUtils;
 import meteordevelopment.meteorclient.addons.GithubRepo;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
@@ -22,6 +23,7 @@ public class AddonTemplate extends MeteorAddon {
 
         // Modules
         Modules.get().add(new Printer(CATEGORY));
+		Modules.get().add(new SecondPerspective(CATEGORY));
     }
 
     @Override

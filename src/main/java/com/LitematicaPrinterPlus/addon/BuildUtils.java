@@ -53,6 +53,15 @@ public class BuildUtils {
 			VoxelShape collisionShape = mc.world.getBlockState(neighbour).getCollisionShape(mc.world, neighbour);
             
 			if(collisionShape.isEmpty()) {
+				
+				if (clientSide){
+					mc.player.setPitch((float)(Rotations.getPitch(hitPos)));
+					
+					mc.player.setYaw((float)Rotations.getYaw(hitPos));
+					mc.player.headYaw = (float)Rotations.getYaw(hitPos);
+					mc.player.bodyYaw = (float)Rotations.getYaw(hitPos);
+				}
+				
 				Rotations.rotate(Rotations.getYaw(hitPos), Rotations.getPitch(hitPos), priority, clientSide,
 	                    () -> 
 	                    	place(new BlockHitResult(hitPos, s, neighbour, false), swingHand)

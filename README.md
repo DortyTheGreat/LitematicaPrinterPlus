@@ -1,6 +1,6 @@
-# Meteor Addon Template
+# LitematicaPrinterPlus
 
-A template to allow easy usage of the Meteor Addon API.
+Meteor addon for LitematicaPrinter, upgrade of [addon mady by kkllffaa](https://github.com/kkllffaa/meteor-litematica-printer)
 
 ### How to use
 

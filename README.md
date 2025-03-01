@@ -2,14 +2,16 @@
 
 Meteor addon for LitematicaPrinter, upgrade of [addon mady by kkllffaa](https://github.com/kkllffaa/meteor-litematica-printer)
 
-### How to use
+### Download
+
+1.21.4 download in awailable in [Releases]()
+
+### Project structure
 
 - Clone this project
 - Use this template to create new modules/commands
 - Build the executable using the gradle `build` task.
 - Run the mod with Meteor.
-
-### Project structure
 
 ```text
 .

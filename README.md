@@ -4,7 +4,7 @@ Meteor addon for LitematicaPrinter, upgrade of [addon mady by kkllffaa](https://
 
 ### Download
 
-1.21.4 download in awailable in [Releases](https://github.com/DortyTheGreat/LitematicaPrinterPlus/releases/tag/1.21.4a)
+1.21.4 download in awailable in [Releases](https://github.com/DortyTheGreat/LitematicaPrinterPlus/releases/latest)
 
 ### Dependencies
 

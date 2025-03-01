@@ -6,6 +6,14 @@ Meteor addon for LitematicaPrinter, upgrade of [addon mady by kkllffaa](https://
 
 1.21.4 download in awailable in [Releases](https://github.com/DortyTheGreat/LitematicaPrinterPlus/releases/tag/1.21.4a)
 
+### Dependencies
+
+Tested successfully with these dependencies, but other might work as well
+
+- malilib-fabric-1.21.4-0.23.2-sakura.6.jar
+- litematica-fabric-1.21.4-0.21.2-sakura.8.jar
+- meteor-client-1.21.4-18.jar
+
 ### Showcase
 
 - Clone this project

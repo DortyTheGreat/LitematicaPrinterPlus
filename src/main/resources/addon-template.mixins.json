@@ -1,5 +1,5 @@
 {
-  "required": true,
+  "required": false,
   "package": "com.LitematicaPrinterPlus.addon.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [

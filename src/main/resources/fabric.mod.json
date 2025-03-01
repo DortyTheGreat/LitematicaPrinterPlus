@@ -3,22 +3,21 @@
   "id": "litematica-printer-plus",
   "version": "${version}",
   "name": "LitematicaPrinterPlus",
-  "description": "Printer For LitematicaPrinterPlus",
+  "description": "Printer For Litematica, upgraded version",
   "authors": [
     "Dorty"
   ],
   "contact": {
-    "repo": "https://github.com/MeteorDevelopment/meteor-addon-template"
+    "repo": "https://github.com/DortyTheGreat/LitematicaPrinterPlus"
   },
   "icon": "assets/template/icon.png",
   "environment": "client",
   "entrypoints": {
     "meteor": [
-      "com.LitematicaPrinterPlus.addon.AddonTemplate"
+      "com.LitematicaPrinterPlus.addon.Addon"
     ]
   },
   "mixins": [
-    "addon-template.mixins.json"
   ],
   "custom": {
     "meteor-client:color": "225,25,25"

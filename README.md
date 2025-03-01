@@ -14,9 +14,10 @@ Tested successfully with these mods, but other might work as well
 - litematica-fabric-1.21.4-0.21.2-sakura.8.jar
 - meteor-client-1.21.4-18.jar
 
-### Showcase
+### Usage
 
-- Toggle 'LitematicaPrinterPlus'
+- Load schematic by clicking on 'Load Schematic' button in Litematica menu(accessible by clicking 'm' by default) 
+- Toggle 'LitematicaPrinterPlus' to start placing blocks 
 - To bypass Grim toggle 'Client Rotations'
     - If you want to reveice less nausea toggle 'Free Look' in Meteor
 

@@ -22,8 +22,6 @@ Tested successfully with these mods, but other might work as well
 
 https://github.com/user-attachments/assets/5d6fbca6-75aa-4284-813b-635c5db9534f
 
-https://github.com/DortyTheGreat/LitematicaPrinterPlus/blob/main/showcase.mp4
-
 ## License
 
 This mod is available under the CC0 license. Feel free to use it for your own projects.

@@ -4,9 +4,9 @@ Meteor addon for LitematicaPrinter, upgrade of [addon mady by kkllffaa](https://
 
 ### Download
 
-1.21.4 download in awailable in [Releases]()
+1.21.4 download in awailable in [Releases](https://github.com/DortyTheGreat/LitematicaPrinterPlus/releases/tag/1.21.4a)
 
-### Project structure
+### Showcase
 
 - Clone this project
 - Use this template to create new modules/commands

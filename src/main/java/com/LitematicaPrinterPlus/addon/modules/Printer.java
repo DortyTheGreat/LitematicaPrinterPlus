@@ -441,7 +441,7 @@ public class Printer extends Module {
         boolean wasPressed = bind.isPressed();
         bind.setPressed(pressed);
 
-        InputUtil.Key key = ((KeyBindingAccessor) bind).getKey();
+        InputUtil.Key key = ((KeyBindingAccessor) bind).meteor$getKey();
         if (wasPressed != pressed && key.getCategory() == InputUtil.Type.KEYSYM) {
             MeteorClient.EVENT_BUS.post(KeyEvent.get(key.getCode(), 0, pressed ? KeyAction.Press : KeyAction.Release));
         }
@@ -514,7 +514,7 @@ public class Printer extends Module {
 		
 		///InvUtils.swap(usedSlot, returnHand.get());
 		if (action.get()){ 
-			usedSlot = mc.player.getInventory().selectedSlot;
+			usedSlot = mc.player.getInventory().getSelectedSlot();
 			return 1;
 		}
 		/// InvUtils.swap(selectedSlot, returnHand.get());
@@ -536,7 +536,7 @@ public class Printer extends Module {
 	private boolean switchItem(Item item, BlockState state, Supplier<Boolean> action) {
 		if (mc.player == null) return false;
 		
-		int selectedSlot = mc.player.getInventory().selectedSlot;
+		int selectedSlot = mc.player.getInventory().getSelectedSlot();
 		boolean isCreative = mc.player.getAbilities().creativeMode;
 		FindItemResult result = special_find(item); 
 		
@@ -562,7 +562,7 @@ public class Printer extends Module {
 				InvUtils.swap(result.slot(), returnHand.get());
 
 				if (action.get()) {
-					usedSlot = mc.player.getInventory().selectedSlot;
+					usedSlot = mc.player.getInventory().getSelectedSlot();
 					return true;
 				} else {
 					InvUtils.swap(selectedSlot, returnHand.get());
@@ -577,7 +577,7 @@ public class Printer extends Module {
 					InvUtils.swap(empty.slot(), returnHand.get());
 
 					if (action.get()) {
-						usedSlot = mc.player.getInventory().selectedSlot;
+						usedSlot = mc.player.getInventory().getSelectedSlot();
 						return true;
 					} else {
 						InvUtils.swap(selectedSlot, returnHand.get());

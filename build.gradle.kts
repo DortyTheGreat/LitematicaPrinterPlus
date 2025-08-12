@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.9-SNAPSHOT"
+    id("fabric-loom") version "1.10-SNAPSHOT"
 }
 
 base {
@@ -29,11 +29,9 @@ dependencies {
     // Meteor
     modImplementation("meteordevelopment:meteor-client:${properties["minecraft_version"] as String}-SNAPSHOT")
 	
-	//litematica
-    //modImplementation "curse.maven:litematica-${project.litematica_projectid}:${project.litematica_fileid}"
-	modImplementation("com.github.sakura-ryoko:litematica:1.21-sakura.8")
-    //modImplementation "fi.dy.masa.malilib:malilib-fabric-${project.minecraft_version}:${project.malilib_version}"
-	modImplementation("com.github.sakura-ryoko:malilib:1.21-sakura.6")
+	//litematica & malilib
+    modImplementation("com.github.sakura-ryoko:litematica:1.21.8-0.23.4-sakura.4")
+    modImplementation("com.github.sakura-ryoko:malilib:1.21.8-0.25.5-sakura.4")
 
 }
 

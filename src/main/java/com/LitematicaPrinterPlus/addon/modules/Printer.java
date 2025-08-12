@@ -88,6 +88,13 @@ import net.minecraft.util.math.Direction.Axis;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.math.Vec3i;
 
+import meteordevelopment.meteorclient.utils.misc.input.Input;
+import net.minecraft.client.option.KeyBinding;
+import meteordevelopment.meteorclient.mixin.KeyBindingAccessor;
+import meteordevelopment.meteorclient.events.meteor.KeyEvent;
+import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
+import net.minecraft.client.util.InputUtil;
+
 public class Printer extends Module {
 	private final SettingGroup sgGeneral = settings.getDefaultGroup();
 	private final SettingGroup sgWhitelist = settings.createGroup("Whitelist");
@@ -179,6 +186,31 @@ public class Printer extends Module {
 			.build()
     );
 	
+	private final Setting<Boolean> stopOnPlace = sgGeneral.add(new BoolSetting.Builder()
+        .name("stop-on-place")
+        .description("Player stops when placing blocks")
+        .defaultValue(false)
+        .build()
+    );
+	
+	private final Setting<Boolean> heatMode = sgGeneral.add(new BoolSetting.Builder()
+        .name("heat-mode")
+        .description("todo")
+        .defaultValue(false)
+		.visible(stopOnPlace::get)
+        .build()
+    );
+	
+	private final Setting<Integer> heatLimit = sgGeneral.add(new IntSetting.Builder()
+			.name("heat-limit")
+			.description("to-do")
+			.defaultValue(10)
+			.visible(heatMode::get)
+			.min(0).sliderMin(0)
+			.max(10000).sliderMax(100)
+			.build()
+	);
+	
 	private final Setting<Integer> priority = sgGeneral.add(new IntSetting.Builder()
 			.name("rotation priority")
 			.description("")
@@ -254,7 +286,7 @@ public class Printer extends Module {
     private int usedSlot = -1;
     private final List<BlockPos> toSort = new ArrayList<>();
     private final List<Pair<Integer, BlockPos>> placed_fade = new ArrayList<>();
-
+	private int heat = 0;
 
 	// TODO: Add an option for smooth rotation. Make it look legit. 
 	// Might use liquidbounce RotationUtils to make it happen.	
@@ -276,11 +308,25 @@ public class Printer extends Module {
 
 	@EventHandler
 	private void onTick(TickEvent.Post event) {
+		
+		
+		
 		if (mc.player == null || mc.world == null) {
 			placed_fade.clear();
 			return;
 		}
+		
+		if (stopOnPlace.get()){
+		
+			set(mc.options.forwardKey, Input.isPressed(mc.options.forwardKey));
+			set(mc.options.backKey, Input.isPressed(mc.options.backKey));
+			set(mc.options.leftKey, Input.isPressed(mc.options.leftKey));
+			set(mc.options.rightKey, Input.isPressed(mc.options.rightKey));
 
+			set(mc.options.jumpKey, Input.isPressed(mc.options.jumpKey));
+			set(mc.options.sneakKey, Input.isPressed(mc.options.sneakKey));
+			set(mc.options.sprintKey, Input.isPressed(mc.options.sprintKey));
+		}
 		placed_fade.forEach(s -> s.setLeft(s.getLeft() - 1));
 		placed_fade.removeIf(s -> s.getLeft() <= 0);
 
@@ -373,10 +419,14 @@ public class Printer extends Module {
 							placed_fade.add(new Pair<>(fadeTime.get(), new BlockPos(pos)));
 						}
 						if (placed >= bpt.get()) {
-							return;
+							break;
 						}
 					}
 				}
+				
+				if (placed >= bpt.get()) return;
+				heat = 0;
+				
 			});
 
 
@@ -386,6 +436,25 @@ public class Printer extends Module {
 	public boolean placeholder(){
 		return true;
 	}
+	
+	private void set(KeyBinding bind, boolean pressed) {
+        boolean wasPressed = bind.isPressed();
+        bind.setPressed(pressed);
+
+        InputUtil.Key key = ((KeyBindingAccessor) bind).meteor$getKey();
+        if (wasPressed != pressed && key.getCategory() == InputUtil.Type.KEYSYM) {
+            MeteorClient.EVENT_BUS.post(KeyEvent.get(key.getCode(), 0, pressed ? KeyAction.Press : KeyAction.Release));
+        }
+    }
+	
+	private void unpress() {
+        mc.options.forwardKey.setPressed(false);
+        mc.options.backKey.setPressed(false);
+        mc.options.rightKey.setPressed(false);
+        mc.options.leftKey.setPressed(false);
+        mc.options.jumpKey.setPressed(false);
+        mc.options.sneakKey.setPressed(false);
+    }
 	
 	public boolean place(BlockState required, BlockPos pos) {
 
@@ -400,6 +469,19 @@ public class Printer extends Module {
     	Direction wantedHopperOrientation = advanced.get() && required.contains(Properties.HOPPER_FACING) ? required.get(Properties.HOPPER_FACING) : null;
     	//Direction wantedFace = advanced.get() && required.contains(Properties.FACING) ? required.get(Properties.FACING) : null;
     	
+		if (stopOnPlace.get()){
+			heat++;
+			
+			if (heatMode.get()){
+				
+				if (heat < heatLimit.get()) return true;
+				
+				
+			}
+			
+			unpress();
+		}
+		
     	Direction placeSide = placeThroughWall.get() ?
     						BuildUtils.getPlaceSide(
     								pos,
@@ -432,7 +514,7 @@ public class Printer extends Module {
 		
 		///InvUtils.swap(usedSlot, returnHand.get());
 		if (action.get()){ 
-			usedSlot = mc.player.getInventory().selectedSlot;
+			usedSlot = mc.player.getInventory().getSelectedSlot();
 			return 1;
 		}
 		/// InvUtils.swap(selectedSlot, returnHand.get());
@@ -454,7 +536,7 @@ public class Printer extends Module {
 	private boolean switchItem(Item item, BlockState state, Supplier<Boolean> action) {
 		if (mc.player == null) return false;
 		
-		int selectedSlot = mc.player.getInventory().selectedSlot;
+		int selectedSlot = mc.player.getInventory().getSelectedSlot();
 		boolean isCreative = mc.player.getAbilities().creativeMode;
 		FindItemResult result = special_find(item); 
 		
@@ -480,7 +562,7 @@ public class Printer extends Module {
 				InvUtils.swap(result.slot(), returnHand.get());
 
 				if (action.get()) {
-					usedSlot = mc.player.getInventory().selectedSlot;
+					usedSlot = mc.player.getInventory().getSelectedSlot();
 					return true;
 				} else {
 					InvUtils.swap(selectedSlot, returnHand.get());
@@ -495,7 +577,7 @@ public class Printer extends Module {
 					InvUtils.swap(empty.slot(), returnHand.get());
 
 					if (action.get()) {
-						usedSlot = mc.player.getInventory().selectedSlot;
+						usedSlot = mc.player.getInventory().getSelectedSlot();
 						return true;
 					} else {
 						InvUtils.swap(selectedSlot, returnHand.get());

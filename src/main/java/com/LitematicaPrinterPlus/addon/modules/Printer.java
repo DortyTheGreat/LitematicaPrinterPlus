@@ -92,6 +92,7 @@ import meteordevelopment.meteorclient.utils.misc.input.Input;
 import net.minecraft.client.option.KeyBinding;
 import meteordevelopment.meteorclient.mixin.KeyBindingAccessor;
 import meteordevelopment.meteorclient.events.meteor.KeyEvent;
+import net.minecraft.client.input.KeyInput;
 import meteordevelopment.meteorclient.utils.misc.input.KeyAction;
 import net.minecraft.client.util.InputUtil;
 
@@ -443,7 +444,16 @@ public class Printer extends Module {
 
         InputUtil.Key key = ((KeyBindingAccessor) bind).meteor$getKey();
         if (wasPressed != pressed && key.getCategory() == InputUtil.Type.KEYSYM) {
-            MeteorClient.EVENT_BUS.post(KeyEvent.get(key.getCode(), 0, pressed ? KeyAction.Press : KeyAction.Release));
+            MeteorClient.EVENT_BUS.post(
+			KeyEvent.get(
+				new KeyInput(
+					key.getCode(), // key
+					0,             // scancode
+					0              // modifiers
+				),
+				pressed ? KeyAction.Press : KeyAction.Release
+			)
+		);
         }
     }
 	

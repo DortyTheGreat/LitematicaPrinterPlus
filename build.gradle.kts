@@ -1,5 +1,5 @@
 plugins {
-    id("fabric-loom") version "1.10-SNAPSHOT"
+    id("fabric-loom") version "1.13-SNAPSHOT"
 }
 
 base {
@@ -30,8 +30,8 @@ dependencies {
     modImplementation("meteordevelopment:meteor-client:${properties["minecraft_version"] as String}-SNAPSHOT")
 	
 	//litematica & malilib
-    modImplementation("com.github.sakura-ryoko:litematica:1.21.8-0.23.4-sakura.4")
-    modImplementation("com.github.sakura-ryoko:malilib:1.21.8-0.25.5-sakura.4")
+    modImplementation("com.github.sakura-ryoko:litematica:${properties["minecraft_version"]}-${properties["litematica_version"]}")
+    modImplementation("com.github.sakura-ryoko:malilib:${properties["minecraft_version"]}-${properties["malilib_version"]}")
 
 }
 

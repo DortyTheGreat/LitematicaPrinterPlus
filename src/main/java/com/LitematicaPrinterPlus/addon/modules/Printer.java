@@ -294,7 +294,7 @@ public class Printer extends Module {
 	// https://github.com/CCBlueX/LiquidBounce/blob/nextgen/src/main/kotlin/net/ccbluex/liquidbounce/utils/aiming/RotationsUtil.kt#L257
 
 	public Printer(Category cat) {
-		super(cat, "litematica-printer", "Automatically prints open schematics");
+		super(cat, "litematica-printer-plus", "Automatically prints open schematics");
 	}
 
     @Override
